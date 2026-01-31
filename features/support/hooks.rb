@@ -22,6 +22,9 @@ Before do
   # Assume all spam checks pass by default.
   allow(Akismetor).to receive(:spam?).and_return(false)
 
+  # Disable audits for performance
+  Audited.auditing_enabled = false
+
   # Don't authenticate for Zoho.
   allow_any_instance_of(ZohoAuthClient).to receive(:access_token)
 
@@ -85,4 +88,8 @@ Before "@load-default-skin" do
   Skin.load_site_css
   Skin.set_default_to_current_version
   AdminSetting.current.update_attribute(:default_skin, Skin.default)
+end
+
+Before "@audits" do
+  Audited.auditing_enabled = true
 end

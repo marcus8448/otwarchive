@@ -308,13 +308,13 @@ describe User do
       redacted_value = "[REDACTED]"
       redacted_arr = Array.new(2, redacted_value)
 
-      it "audits and redacts password changes" do
+      it "audits and redacts password changes", :audits do
         last_change = existing_user.audits.pluck(:audited_changes).last
 
         expect(last_change["encrypted_password"]).to eq(redacted_arr)
       end
 
-      it "deserializes old BCrypt password changes" do
+      it "deserializes old BCrypt password changes", :audits do
         salt = SecureRandom.urlsafe_base64(15)
         bcrypt_password = BCrypt::Password.create(
           ["another_password", salt].flatten.join,

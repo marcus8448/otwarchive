@@ -70,6 +70,9 @@ RSpec.configure do |config|
 
     # Stub all requests to example.org, the default external work URL:
     WebMock.stub_request(:any, /example/)
+
+    # Disable auditing for performance
+    Audited.auditing_enabled = false
   end
 
   config.after :each do
@@ -144,6 +147,10 @@ RSpec.configure do |config|
 
   config.before :each, :frozen do
     freeze_time
+  end
+
+  config.before :each, :audits do
+    Audited.auditing_enabled = true
   end
 
   # If you're not using ActiveRecord, or you'd prefer not to run each of your

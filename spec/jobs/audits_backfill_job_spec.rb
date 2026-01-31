@@ -2,7 +2,7 @@
 
 require "spec_helper"
 
-describe AuditsBackfillJob do
+describe AuditsBackfillJob, :audits do
   let(:existing_user) { create(:user) }
 
   context "when audits previously exist" do
