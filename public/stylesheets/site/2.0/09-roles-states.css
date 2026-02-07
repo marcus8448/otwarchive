@@ -45,6 +45,14 @@ span.unread, .replied, span.claimed, .actions span.defaulted {
   display: none;
 }
 
+.invisible {
+  visibility: hidden;
+}
+
+.clipped {
+  overflow: hidden;
+}
+
 .draggable, .droppable, span.requested, .nominations .rejected {
   color: #900;
 }
