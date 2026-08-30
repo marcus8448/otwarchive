@@ -450,6 +450,14 @@ describe CommentMailer do
 
         it_behaves_like "a notification email to someone who can review comments"
       end
+
+      context "when the admin post has no admin_id set" do
+        let!(:admin) { create(:admin) }
+        let(:admin_post) { create(:admin_post, admin_id: nil) }
+        let(:comment) { create(:comment, commentable: admin_post) }
+
+        it_behaves_like "a notification email for admins"
+      end
     end
 
     context "when the comment is a reply to another comment" do

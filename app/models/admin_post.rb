@@ -60,11 +60,7 @@ class AdminPost < ApplicationRecord
   end
 
   def commentable_owners
-    begin
-        [Admin.find(self.admin_id)]
-    rescue
-      []
-    end
+    [Admin.first]
   end
 
   def draft?
