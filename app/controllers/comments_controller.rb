@@ -344,10 +344,8 @@ class CommentsController < ApplicationController
   end
 
   def unreviewed
-    @comments = @commentable.find_all_comments
-      .unreviewed_only
-      .for_display
-      .page(params[:page])
+    @comments = @commentable.unreviewed_comments_to_show(logged_in_as_admin?)
+    @comments = @comments.for_display.page(params[:page])
   end
 
   # GET /comments/1
