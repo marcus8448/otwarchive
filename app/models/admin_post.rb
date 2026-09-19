@@ -60,7 +60,9 @@ class AdminPost < ApplicationRecord
   end
 
   def commentable_owners
-    [Admin.first]
+    [Admin.find(self.admin_id)]
+  rescue ActiveRecord::RecordNotFound
+    []
   end
 
   def draft?
